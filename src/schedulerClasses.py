@@ -10,7 +10,6 @@ class VariableScheduler():
         professor     string      'DrShade'
         
         """
-        # String arguments are set to lowercase.
         self.title = title.lower()
         self.professor = professor.lower()
  
@@ -30,10 +29,7 @@ class DomainScheduler():
         dayOfWeek       string      'Monday'
         isComputerLab   boolean   	False
         """
-        # Building code should be the four letter code (CHEK/TEMP/etc) for standardization
-		# times should be in military time for easier calculation
-		
-        # String arguments are set to lowercase.
+        
         self.building = building.lower()
         self.room = room.lower()
         self.start_time = start_time
@@ -41,7 +37,7 @@ class DomainScheduler():
         self.dayOfWeek = dayOfWeek.lower()
         self.isComputerLab = isInComputerLab
         
-class ObjectScheduler(object):
+class Scheduler(object):
     """Define a domain."""
     
     def __init__(self, variable, listDomains):
@@ -56,5 +52,30 @@ class ObjectScheduler(object):
         # String arguments are set to lowercase.
         self.variable = variable
         self.listDomains = listDomains
+        
+class PreProcessing():
+    #types of pre processing
+    specificDaysWeek = 1
+    specificHours = 2
+    notInComputerLab = 3
+    partiallySpecified = 4
 
+    def __init__(self, variables, typeP, days=None , hours = None, localization = None):
+        """.
 
+        PARAMETERS      TYPE        Potential Arguments
+        -----------------------------------------------
+        variables
+        typeP
+        days 
+        hours            tuple        (0,11)
+        """
+        self.variables = variables
+        self.type = typeP
+        if typeP == PreProcessing.specificDaysWeek:
+            self.days = days
+        if typeP == PreProcessing.specificHours:
+            self.start, self.end = hours
+        if typeP == PreProcessing.partiallySpecified:
+            self.days = days
+            self.building, self.room = localization
