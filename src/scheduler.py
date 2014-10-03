@@ -21,7 +21,7 @@ def createScheduler(schedulerVariables, schedulerDomains, listPreProcessing = No
     #two different courses can't be at same room and time and day
     problem.addConstraint(AllDifferentConstraint())
     if listConstraints:
-        for constranint in listConstraints:
+        for constraint in listConstraints:
             #addConstraint(constraint):
             pass
     
@@ -41,13 +41,13 @@ def createScheduler(schedulerVariables, schedulerDomains, listPreProcessing = No
     #         return True
     # 
     #problem.getSolutions()
-    output = []
-    for result in problem.getSolutions():
-        output.append(result)
+#     output = []
+#     for result in problem.getSolutions():
+#         output.append(result)
 #         for k in result.keys():
 #             print k.title, result[k].building + result[k].room + result[k].dayOfWeek + str(result[k].start_time)
 #         print "------------------------------------"
-    return output    
+    return problem.getSolutions()   
 
 if __name__ == "__main__":
 #     #create variables
