@@ -32,10 +32,10 @@ class DomainScheduler():
         
         self.building = building.lower()
         self.room = room.lower()
-        self.start_time = start_time
-        self.end_time = end_time
+        self.startTime = start_time
+        self.endTime = end_time
         self.dayOfWeek = dayOfWeek.lower()
-        self.isComputerLab = isInComputerLab
+        self.isInComputerLab = isInComputerLab
         
 class Scheduler(object):
     """Define a domain."""
@@ -52,8 +52,9 @@ class Scheduler(object):
         # String arguments are set to lowercase.
         self.variable = variable
         self.listDomains = listDomains
-        
-class PreProcessing():
+        self.result = []
+
+class SchedulerPreProcessing():
     #types of pre processing
     specificDaysWeek = 1
     specificHours = 2
@@ -72,10 +73,16 @@ class PreProcessing():
         """
         self.variables = variables
         self.type = typeP
-        if typeP == PreProcessing.specificDaysWeek:
+        if typeP == SchedulerPreProcessing.specificDaysWeek:
             self.days = days
-        if typeP == PreProcessing.specificHours:
+        if typeP == SchedulerPreProcessing.specificHours:
             self.start, self.end = hours
-        if typeP == PreProcessing.partiallySpecified:
+        if typeP == SchedulerPreProcessing.partiallySpecified:
             self.days = days
             self.building, self.room = localization
+
+class SchedulerConstraint():
+    allDiferentConstraint = 1
+    
+    def __init__(self, constraintType):
+        self.constraintType = constraintType

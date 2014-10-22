@@ -1,20 +1,20 @@
 from schedulerClasses import *
 
 def testTypeProcessing(domain,preProObj):
-    if preProObj.type == PreProcessing.specificDaysWeek:
+    if preProObj.type == SchedulerPreProcessing.specificDaysWeek:
         if domain.dayOfWeek in preProObj.days:
             return True
 
-    elif preProObj.type == PreProcessing.specificHours:
+    elif preProObj.type == SchedulerPreProcessing.specificHours:
         if preProObj.start <= domain.time and preProObj.end >= domain.time :
             return True
 
-    elif preProObj.type == PreProcessing.partiallySpecified:
+    elif preProObj.type == SchedulerPreProcessing.partiallySpecified:
         if preProObj.room != domain.room or preProObj.building != domain.building\
             or not domain.dayOfWeek in preProObj.days:
             return True
 
-    elif preProObj.type == PreProcessing.notInComputerLab:
+    elif preProObj.type == SchedulerPreProcessing.notInComputerLab:
         return domain.isComputerLab    
     return False
 
