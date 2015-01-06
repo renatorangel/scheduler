@@ -12,10 +12,10 @@ def printResults(problem):
             print "Room: ", result[k].room
             print "Day: ", result[k].dayOfWeek, "Hour: ", result[k].startTime  
         
-def createScheduler(schedulerVariables, schedulerDomains, listPreProcessing = None, listConstraints = None):
+def createScheduler(schedulerVariables, schedulerDomains, listPreProcessing = None, listConstraint = None):
     matches = []
     for schedulerVariable in schedulerVariables:
-        matches.append(Scheduler(schedulerVariable,schedulerDomains[:]))
+        matches.append((schedulerVariable,schedulerDomains[:]))
 
     problem = Problem()
     
@@ -24,17 +24,20 @@ def createScheduler(schedulerVariables, schedulerDomains, listPreProcessing = No
         for preProcessingObj in listPreProcessing:
             matches = preProcessing(preProcessingObj, matches)
         
-    for obj in matches:
+    for var, domain in matches:
         # domains have been pre-processed, now add the variables to the problem
-        problem.addVariable(obj.variable,obj.listDomains)
+        problem.addVariable(var,domain)
     
     #add schedulerConstraint
-    if listConstraints:
-        for constraint in listConstraints:
+    if listConstraint:
+        for constraint in listConstraint:
             problem.addConstraint(addSchedulerConstraint(constraint))
             
     printResults(problem)
-    return problem.getSolutions()  
+    
+    scheduler =  Scheduler(matches, problem)
+    
+    return scheduler 
 
-if __name__ == "__main__":
-    createScheduler()
+# if __name__ == "__main__":
+#     createScheduler()

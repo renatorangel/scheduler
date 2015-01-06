@@ -40,7 +40,7 @@ class DomainScheduler():
 class Scheduler(object):
     """Define a domain."""
     
-    def __init__(self, variable, listDomains):
+    def __init__(self, matches, problem):
         """.
 
         PARAMETERS      TYPE        Potential Arguments
@@ -49,10 +49,15 @@ class Scheduler(object):
         
         """
         
-        # String arguments are set to lowercase.
-        self.variable = variable
-        self.listDomains = listDomains
-        self.result = []
+        self.matches = matches
+        schedule = []
+        self.allSchedules = []
+        for result in problem.getSolutions():
+            for k in result.keys():
+                course =  k
+                local = result[k]
+                schedule.append((course,local))
+            self.allSchedules.append(schedule.pop())
 
 class SchedulerPreProcessing():
     #types of pre processing

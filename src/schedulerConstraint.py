@@ -2,7 +2,7 @@ from schedulerClasses import SchedulerConstraint
 from constraint import *
 
 def addSchedulerConstraint(constraint):
-    if constraint.type == SchedulerConstraint.allDiferentConstraint:
+    if constraint.constraintType == SchedulerConstraint.allDiferentConstraint:
         #two different courses can't be at same room and time and day 
         return AllDifferentConstraint()
     
